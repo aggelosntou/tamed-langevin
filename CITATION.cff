@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "Tamed Langevin Experiments"
+message: "If you use this software, please cite the associated paper."
+type: software
+authors:
+  - family-names: Ntousis
+    given-names: Angelos
+repository-code: "https://github.com/aggelosntou/tamed-langevin-experiments"
+license: MIT
+version: 0.1.0

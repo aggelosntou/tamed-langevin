@@ -1,0 +1,10 @@
+{
+  "beta": 1.0,
+  "dimension": 100,
+  "lambdas": [0.1, 0.01, 0.001],
+  "n_steps": 200000,
+  "burn_in": 50000,
+  "n_reps": 30,
+  "seed": 1234,
+  "a_tame": 0.05
+}

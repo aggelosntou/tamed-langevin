@@ -1,0 +1,16 @@
+{
+  "din": 20,
+  "width": 64,
+  "depth": 3,
+  "n_train": 2000,
+  "n_test": 1000,
+  "batch": 128,
+  "n_epochs": 20,
+  "seeds": [1, 2, 3, 4, 5],
+  "lr": 0.05,
+  "sweep_lrs": [0.05, 0.10, 0.20],
+  "eta": 1.0,
+  "init_scale": 2.0,
+  "beta": 1000000.0,
+  "a_tame": 0.05
+}
