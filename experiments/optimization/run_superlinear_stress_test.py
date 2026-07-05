@@ -88,7 +88,7 @@ class Config:
     n_epochs: int = 20
     seeds: Tuple[int, ...] = (1, 2, 3, 4, 5)
 
-    lr: float = 0.05
+    lr: float = 0.2
     sweep_lrs: Tuple[float, ...] = (0.05, 0.10, 0.20)
     eta: float = 1.0
     init_scale: float = 2.0
