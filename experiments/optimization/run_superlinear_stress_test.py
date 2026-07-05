@@ -308,6 +308,28 @@ def make_dataset(cfg: Config, seed: int):
 
     return (x[:cfg.n_train], y[:cfg.n_train]), (x[cfg.n_train:], y[cfg.n_train:])
 
+def compute_null_baselines(cfg: Config) -> Dict[str, float]:
+    train_mses = []
+    test_mses = []
+    constants = []
+
+    for seed in cfg.seeds:
+        (z_train, y_train), (z_test, y_test) = make_dataset(cfg, seed)
+
+        null_pred = float(np.mean(y_train))
+        null_train_mse = float(np.mean((y_train - null_pred) ** 2))
+        null_test_mse = float(np.mean((y_test - null_pred) ** 2))
+
+        constants.append(null_pred)
+        train_mses.append(null_train_mse)
+        test_mses.append(null_test_mse)
+
+    return {
+        "median_constant": float(np.median(constants)),
+        "median_train_mse": float(np.median(train_mses)),
+        "median_test_mse": float(np.median(test_mses)),
+    }
+
 
 # ============================================================
 # Training
@@ -1243,7 +1265,14 @@ def main() -> None:
     print(f"main lr={cfg.lr}, eta={cfg.eta}, init_scale={cfg.init_scale}")
     print(f"methods={', '.join(LABELS[m] for m in METHODS)}")
     print(f"output directory: {cfg.out_dir}")
+    
+    null = compute_null_baselines(cfg)
 
+    print("\nNull baseline")
+    print("-------------")
+    print(f"median constant prediction = {null['median_constant']:.6e}")
+    print(f"median null train MSE      = {null['median_train_mse']:.6e}")
+    print(f"median null test MSE       = {null['median_test_mse']:.6e}")
     t0 = time.time()
 
     results = run_main(cfg)
